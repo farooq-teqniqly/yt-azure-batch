@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AzBatch.Abstractions;
-using Microsoft.Azure.Batch;
-using Microsoft.Azure.Batch.Auth;
-using Microsoft.Azure.Batch.Common;
-
-namespace Teqniqly.AzBatch.Infrastructure
+﻿namespace Teqniqly.AzBatch.Infrastructure
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.Azure.Batch;
+    using Microsoft.Azure.Batch.Auth;
+    using Microsoft.Azure.Batch.Common;
+    using Teqniqly.AzBatch.Abstractions;
+
     public sealed class BatchService : IBatchService, IDisposable
     {
         private readonly BatchServiceConfiguration configuration;

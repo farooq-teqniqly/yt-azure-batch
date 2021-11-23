@@ -1,7 +1,7 @@
-﻿using AzBatch.Abstractions;
-
-namespace Teqniqly.AzBatch.Api.Controllers
+﻿namespace Teqniqly.AzBatch.Api.Controllers
 {
+    using Teqniqly.AzBatch.Abstractions;
+
     public class CreateBatchPoolRequest
     {
         public BatchPoolConfiguration BatchPoolConfiguration { get; set; }

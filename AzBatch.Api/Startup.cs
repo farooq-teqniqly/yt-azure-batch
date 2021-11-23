@@ -1,14 +1,14 @@
-using AzBatch.Abstractions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Teqniqly.AzBatch.Infrastructure;
-
 namespace Teqniqly.AzBatch.Api
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
+    using Teqniqly.AzBatch.Abstractions;
+    using Teqniqly.AzBatch.Infrastructure;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

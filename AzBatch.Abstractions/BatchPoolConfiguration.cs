@@ -1,4 +1,4 @@
-﻿namespace AzBatch.Abstractions
+﻿namespace Teqniqly.AzBatch.Abstractions
 {
     public class BatchPoolConfiguration
     {

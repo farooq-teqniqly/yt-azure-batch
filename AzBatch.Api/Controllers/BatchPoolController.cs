@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AzBatch.Abstractions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Batch;
-using Microsoft.Azure.Batch.Common;
-using Microsoft.Extensions.Logging;
-
-namespace Teqniqly.AzBatch.Api.Controllers
+﻿namespace Teqniqly.AzBatch.Api.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.Batch;
+    using Microsoft.Azure.Batch.Common;
+    using Microsoft.Extensions.Logging;
+    using Teqniqly.AzBatch.Abstractions;
+
     [ApiController]
     [Route("pool")]
     public class BatchPoolController : ControllerBase

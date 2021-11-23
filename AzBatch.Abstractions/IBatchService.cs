@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace AzBatch.Abstractions
+﻿namespace Teqniqly.AzBatch.Abstractions
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IBatchService
     {
         Task CreatePoolAsync(
