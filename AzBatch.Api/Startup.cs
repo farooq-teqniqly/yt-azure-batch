@@ -6,6 +6,8 @@ namespace Teqniqly.AzBatch.Api
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Azure.Batch;
+    using Microsoft.Azure.Batch.Auth;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -33,10 +35,20 @@ namespace Teqniqly.AzBatch.Api
 
             services.AddSingleton<IBatchService, BatchService>();
 
-            services.AddSingleton<BatchServiceConfiguration>(provider => this
+            var batchServiceConfiguration = this
                 .Configuration
                 .GetSection("BatchServiceConfiguration")
-                .Get<BatchServiceConfiguration>());
+                .Get<BatchServiceConfiguration>();
+
+            services.AddSingleton<BatchClient>(provider =>
+            {
+                var credentials = new BatchSharedKeyCredentials(
+                    batchServiceConfiguration.ConnectionConfiguration.EndpointUri,
+                    batchServiceConfiguration.ConnectionConfiguration.AccountName,
+                    batchServiceConfiguration.ConnectionConfiguration.AccountKey);
+
+                return BatchClient.Open(credentials);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
