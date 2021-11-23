@@ -17,11 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{BD78AE
 		deploy\parameters.dev.json = deploy\parameters.dev.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzBatch.Management.Api", "AzBatch.Management.Api\AzBatch.Management.Api.csproj", "{8B72DFEB-3BD7-46C1-9286-BDF3C29ADEFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzBatch.Management.Api", "AzBatch.Management.Api\AzBatch.Management.Api.csproj", "{8B72DFEB-3BD7-46C1-9286-BDF3C29ADEFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzBatch.Management.Abstractions", "AzBatch.Management.Abstractions\AzBatch.Management.Abstractions.csproj", "{1B4A08C5-B744-4676-B8C9-C752BE91EAF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzBatch.Management.Abstractions", "AzBatch.Management.Abstractions\AzBatch.Management.Abstractions.csproj", "{1B4A08C5-B744-4676-B8C9-C752BE91EAF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzBatch.Management.Infrastructure", "AzBatch.Management.Infrastructure\AzBatch.Management.Infrastructure.csproj", "{B8993BE0-61FF-443E-A809-311229D6DEF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzBatch.Management.Infrastructure", "AzBatch.Management.Infrastructure\AzBatch.Management.Infrastructure.csproj", "{B8993BE0-61FF-443E-A809-311229D6DEF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflixDataPreprocessor", "NetflixDataPreprocessor\NetflixDataPreprocessor.csproj", "{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{D9DBC00D-FDA0-40D4-B4A9-C808516E529A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,9 +109,24 @@ Global
 		{B8993BE0-61FF-443E-A809-311229D6DEF0}.Release|x64.Build.0 = Release|Any CPU
 		{B8993BE0-61FF-443E-A809-311229D6DEF0}.Release|x86.ActiveCfg = Release|Any CPU
 		{B8993BE0-61FF-443E-A809-311229D6DEF0}.Release|x86.Build.0 = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|x64.Build.0 = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Debug|x86.Build.0 = Debug|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x64.ActiveCfg = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x64.Build.0 = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x86.ActiveCfg = Release|Any CPU
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502} = {D9DBC00D-FDA0-40D4-B4A9-C808516E529A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1D40680-CF61-40DE-A983-1F6C12E4B93B}
