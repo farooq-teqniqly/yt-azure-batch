@@ -9,8 +9,6 @@ namespace Teqniqly.AzBatch.Api.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.Batch;
-    using Microsoft.Azure.Batch.Common;
     using Microsoft.Extensions.Logging;
     using Teqniqly.AzBatch.Abstractions;
     using Teqniqly.AzBatch.Infrastructure;
@@ -46,11 +44,14 @@ namespace Teqniqly.AzBatch.Api.Controllers
 
                 return this.Accepted();
             }
-            catch (BatchApiException batchApiException)
+            catch (BatchServiceException batchApiException)
             {
                 if (!batchApiException.PoolExists())
                 {
-                    this.logger.LogError(batchApiException.ToString());
+                    this.logger.LogError(
+                        batchApiException,
+                        batchApiException.Message);
+
                     return this.BadRequest(batchApiException.Message);
                 }
 
@@ -58,7 +59,10 @@ namespace Teqniqly.AzBatch.Api.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.LogError(exception.ToString());
+                this.logger.LogError(
+                    exception,
+                    exception.Message);
+
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -76,19 +80,25 @@ namespace Teqniqly.AzBatch.Api.Controllers
                 var state = await this.batchService.GetPoolAllocationStateAsync(poolId);
                 return this.Ok(state);
             }
-            catch (BatchApiException batchApiException)
+            catch (BatchServiceException batchApiException)
             {
                 if (batchApiException.PoolNotFound())
                 {
                     return this.NotFound();
                 }
 
-                this.logger.LogError(batchApiException.ToString());
+                this.logger.LogError(
+                    batchApiException,
+                    batchApiException.Message);
+
                 return this.BadRequest(batchApiException.Message);
             }
             catch (Exception exception)
             {
-                this.logger.LogError(exception.ToString());
+                this.logger.LogError(
+                    exception,
+                    exception.Message);
+
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -105,19 +115,25 @@ namespace Teqniqly.AzBatch.Api.Controllers
                 await this.batchService.DeletePoolAsync(poolId);
                 return this.NoContent();
             }
-            catch (BatchApiException batchApiException)
+            catch (BatchServiceException batchApiException)
             {
                 if (batchApiException.PoolNotFound())
                 {
                     return this.NoContent();
                 }
 
-                this.logger.LogError(batchApiException.ToString());
+                this.logger.LogError(
+                    batchApiException,
+                    batchApiException.Message);
+
                 return this.BadRequest(batchApiException.Message);
             }
             catch (Exception exception)
             {
-                this.logger.LogError(exception.ToString());
+                this.logger.LogError(
+                    exception,
+                    exception.Message);
+
                 return this.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

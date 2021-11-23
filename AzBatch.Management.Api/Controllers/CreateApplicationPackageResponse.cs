@@ -9,7 +9,9 @@ namespace Teqniqly.AzBatch.Management.Api.Controllers
     public class CreateApplicationPackageResponse
     {
         public string StorageUrl { get; set; }
+
         public DateTime? StorageUrlExpiresOn { get; set; }
+
         public string ApplicationPackageState { get; set; }
     }
 }
