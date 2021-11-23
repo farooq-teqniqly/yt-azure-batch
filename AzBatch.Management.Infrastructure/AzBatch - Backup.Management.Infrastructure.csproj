@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Teqniqly.AzBatch.Management.Infrastructure</AssemblyName>
+    <RootNamespace>Teqniqly.AzBatch.Management.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+</Project>

@@ -15,13 +15,11 @@ namespace Teqniqly.AzBatch.Infrastructure
 
     public sealed class BatchService : IBatchService, IDisposable
     {
-        private readonly BatchServiceConfiguration configuration;
-        private BatchClient client;
+        private readonly BatchClient batchClient;
 
-        public BatchService(BatchServiceConfiguration configuration)
+        public BatchService(BatchClient batchClient)
         {
-            this.configuration = configuration;
-            this.Connect();
+            this.batchClient = batchClient;
         }
 
         public async Task CreatePoolAsync(
@@ -38,7 +36,7 @@ namespace Teqniqly.AzBatch.Infrastructure
                     imageReferenceConfiguration.Version),
                 vmConfiguration.NodeAgentSkuId);
 
-            var pool = this.client.PoolOperations.CreatePool(
+            var pool = this.batchClient.PoolOperations.CreatePool(
                 batchPoolConfiguration.Id,
                 vmConfiguration.Size,
                 azBatchVmConfig);
@@ -65,7 +63,7 @@ namespace Teqniqly.AzBatch.Infrastructure
             try
             {
                 var allocationState = (await this
-                            .client
+                            .batchClient
                             .PoolOperations
                             .GetPoolAsync(poolId))
                         .AllocationState;
@@ -82,7 +80,7 @@ namespace Teqniqly.AzBatch.Infrastructure
         {
             try
             {
-                await this.client.PoolOperations.DeletePoolAsync(poolId);
+                await this.batchClient.PoolOperations.DeletePoolAsync(poolId);
             }
             catch (BatchException batchException)
             {
@@ -92,17 +90,7 @@ namespace Teqniqly.AzBatch.Infrastructure
 
         public void Dispose()
         {
-            this.client?.Dispose();
-        }
-
-        private void Connect()
-        {
-            BatchSharedKeyCredentials credentials = new BatchSharedKeyCredentials(
-                this.configuration.ConnectionConfiguration.EndpointUri,
-                this.configuration.ConnectionConfiguration.AccountName,
-                this.configuration.ConnectionConfiguration.AccountKey);
-
-            this.client = BatchClient.Open(credentials);
+            this.batchClient?.Dispose();
         }
     }
 }
