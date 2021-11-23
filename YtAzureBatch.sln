@@ -27,6 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflixDataPreprocessor", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{D9DBC00D-FDA0-40D4-B4A9-C808516E529A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{C64A638F-AB45-42EF-9373-C7B16E12C4CF}"
+	ProjectSection(SolutionItems) = preProject
+		data\netflix-files.zip = data\netflix-files.zip
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastCounter", "CastCounter\CastCounter.csproj", "{F3A608BF-D382-471C-864E-5DEF49D25315}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,12 +128,25 @@ Global
 		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x64.Build.0 = Release|Any CPU
 		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x86.ActiveCfg = Release|Any CPU
 		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502}.Release|x86.Build.0 = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|x64.Build.0 = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Debug|x86.Build.0 = Debug|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|x64.ActiveCfg = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|x64.Build.0 = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|x86.ActiveCfg = Release|Any CPU
+		{F3A608BF-D382-471C-864E-5DEF49D25315}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{52889AFC-CC88-4CEE-9FF3-D88FD79B0502} = {D9DBC00D-FDA0-40D4-B4A9-C808516E529A}
+		{F3A608BF-D382-471C-864E-5DEF49D25315} = {D9DBC00D-FDA0-40D4-B4A9-C808516E529A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1D40680-CF61-40DE-A983-1F6C12E4B93B}
