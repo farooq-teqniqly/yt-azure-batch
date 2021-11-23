@@ -1,4 +1,8 @@
-﻿namespace Teqniqly.AzBatch.Abstractions
+﻿// <copyright file="IBatchService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Teqniqly.AzBatch.Abstractions
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

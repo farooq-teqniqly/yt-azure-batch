@@ -1,4 +1,8 @@
-﻿namespace Teqniqly.AzBatch.Api.Controllers
+﻿// <copyright file="BatchPoolController.cs" company="Teqniqly">
+// Copyright (c) Teqniqly. All rights reserved.
+// </copyright>
+
+namespace Teqniqly.AzBatch.Api.Controllers
 {
     using System;
     using System.Linq;
@@ -24,7 +28,7 @@
             this.batchService = batchService;
             this.logger = logger;
         }
-        
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(BatchError))]

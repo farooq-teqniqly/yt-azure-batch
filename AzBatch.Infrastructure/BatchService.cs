@@ -1,4 +1,8 @@
-﻿namespace Teqniqly.AzBatch.Infrastructure
+﻿// <copyright file="BatchService.cs" company="Teqniqly">
+// Copyright (c) Teqniqly. All rights reserved.
+// </copyright>
+
+namespace Teqniqly.AzBatch.Infrastructure
 {
     using System;
     using System.Collections.Generic;
@@ -18,16 +22,6 @@
         {
             this.configuration = configuration;
             this.Connect();
-        }
-
-        private void Connect()
-        {
-            BatchSharedKeyCredentials credentials = new BatchSharedKeyCredentials(
-                this.configuration.ConnectionConfiguration.EndpointUri,
-                this.configuration.ConnectionConfiguration.AccountName,
-                this.configuration.ConnectionConfiguration.AccountKey);
-
-            this.client = BatchClient.Open(credentials);
         }
 
         public async Task CreatePoolAsync(
@@ -98,6 +92,16 @@
         public void Dispose()
         {
             this.client?.Dispose();
+        }
+
+        private void Connect()
+        {
+            BatchSharedKeyCredentials credentials = new BatchSharedKeyCredentials(
+                this.configuration.ConnectionConfiguration.EndpointUri,
+                this.configuration.ConnectionConfiguration.AccountName,
+                this.configuration.ConnectionConfiguration.AccountKey);
+
+            this.client = BatchClient.Open(credentials);
         }
     }
 }

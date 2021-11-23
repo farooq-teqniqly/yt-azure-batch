@@ -1,3 +1,7 @@
+// <copyright file="Startup.cs" company="Teqniqly">
+// Copyright (c) Teqniqly. All rights reserved.
+// </copyright>
+
 namespace Teqniqly.AzBatch.Api
 {
     using Microsoft.AspNetCore.Builder;
@@ -13,7 +17,7 @@ namespace Teqniqly.AzBatch.Api
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,7 +32,7 @@ namespace Teqniqly.AzBatch.Api
             });
 
             services.AddSingleton<IBatchService, BatchService>();
-            
+
             services.AddSingleton<BatchServiceConfiguration>(provider => this
                 .Configuration
                 .GetSection("BatchServiceConfiguration")
