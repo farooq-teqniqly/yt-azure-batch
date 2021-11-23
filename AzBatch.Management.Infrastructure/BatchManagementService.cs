@@ -7,6 +7,7 @@ namespace Teqniqly.AzBatch.Management.Infrastructure
     using System;
     using System.Threading.Tasks;
     using Microsoft.Azure.Management.Batch;
+    using Microsoft.Rest.Azure;
     using Teqniqly.AzBatch.Management.Abstractions;
 
     public sealed class BatchManagementService : IBatchManagementService, IDisposable
@@ -59,13 +60,20 @@ namespace Teqniqly.AzBatch.Management.Infrastructure
 
         public async Task DeleteApplicationAsync(string applicationName)
         {
-            await this
-                .batchManagementClient
-                .Application
-                .DeleteAsync(
-                    this.configuration.ResourceGroupName,
-                    this.configuration.BatchAccountName,
-                    applicationName);
+            try
+            {
+                await this
+                        .batchManagementClient
+                        .Application
+                        .DeleteAsync(
+                            this.configuration.ResourceGroupName,
+                            this.configuration.BatchAccountName,
+                            applicationName);
+            }
+            catch (CloudException cloudException)
+            {
+                throw new BatchManagementServiceException(cloudException);
+            }
         }
 
         public void Dispose()

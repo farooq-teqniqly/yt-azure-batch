@@ -8,18 +8,18 @@ namespace Teqniqly.AzBatch.Infrastructure
 
     public static class Extensions
     {
-        public static bool PoolNotFound(this BatchApiException batchApiException)
+        public static bool PoolNotFound(this BatchServiceException batchServiceException)
         {
-            return batchApiException
+            return batchServiceException
                 .NativeException
                 .RequestInformation?
                 .BatchError?
                 .Code == BatchErrorCodeStrings.PoolNotFound;
         }
 
-        public static bool PoolExists(this BatchApiException batchApiException)
+        public static bool PoolExists(this BatchServiceException batchServiceException)
         {
-            return batchApiException
+            return batchServiceException
                 .NativeException
                 .RequestInformation?
                 .BatchError?

@@ -54,7 +54,7 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
             catch (BatchException batchException)
             {
-                throw new BatchApiException(batchException);
+                throw new BatchServiceException(batchException);
             }
         }
 
@@ -72,7 +72,7 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
             catch (BatchException batchException)
             {
-                throw new BatchApiException(batchException);
+                throw new BatchServiceException(batchException);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
             catch (BatchException batchException)
             {
-                throw new BatchApiException(batchException);
+                throw new BatchServiceException(batchException);
             }
         }
 
