@@ -56,22 +56,26 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
             catch (BatchException batchException)
             {
-                if (batchException.RequestInformation?.BatchError?.Code != BatchErrorCodeStrings.PoolExists)
-                {
-                    throw;
-                }
+                throw new BatchApiException(batchException);
             }
         }
 
         public async Task<string> GetPoolAllocationStateAsync(string poolId)
         {
-            var allocationState = (await this
-                    .client
-                    .PoolOperations
-                    .GetPoolAsync(poolId))
-                .AllocationState;
+            try
+            {
+                var allocationState = (await this
+                            .client
+                            .PoolOperations
+                            .GetPoolAsync(poolId))
+                        .AllocationState;
 
-            return allocationState.ToString();
+                return allocationState.ToString();
+            }
+            catch (BatchException batchException)
+            {
+                throw new BatchApiException(batchException);
+            }
         }
 
         public async Task DeletePoolAsync(string poolId)
@@ -82,10 +86,7 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
             catch (BatchException batchException)
             {
-                if (batchException.RequestInformation?.BatchError?.Code != BatchErrorCodeStrings.PoolNotFound)
-                {
-                    throw;
-                }
+                throw new BatchApiException(batchException);
             }
         }
 

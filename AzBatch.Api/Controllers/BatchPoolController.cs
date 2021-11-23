@@ -13,6 +13,7 @@ namespace Teqniqly.AzBatch.Api.Controllers
     using Microsoft.Azure.Batch.Common;
     using Microsoft.Extensions.Logging;
     using Teqniqly.AzBatch.Abstractions;
+    using Teqniqly.AzBatch.Infrastructure;
 
     [ApiController]
     [Route("pool")]
@@ -31,7 +32,7 @@ namespace Teqniqly.AzBatch.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(BatchError))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateBatchPoolAsync([FromBody] CreateBatchPoolRequest request)
         {
@@ -45,11 +46,15 @@ namespace Teqniqly.AzBatch.Api.Controllers
 
                 return this.Accepted();
             }
-            catch (BatchException batchException)
+            catch (BatchApiException batchApiException)
             {
-                var batchError = batchException.RequestInformation?.BatchError;
-                this.logger.LogError(batchError?.ToString());
-                return this.BadRequest(batchException.RequestInformation?.BatchError);
+                if (!batchApiException.PoolExists())
+                {
+                    this.logger.LogError(batchApiException.ToString());
+                    return this.BadRequest(batchApiException.Message);
+                }
+
+                return this.Accepted();
             }
             catch (Exception exception)
             {
@@ -61,7 +66,8 @@ namespace Teqniqly.AzBatch.Api.Controllers
         [HttpGet]
         [Route("{poolId}/state")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BatchError))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetBatchPoolStateAsync(string poolId)
         {
@@ -70,11 +76,15 @@ namespace Teqniqly.AzBatch.Api.Controllers
                 var state = await this.batchService.GetPoolAllocationStateAsync(poolId);
                 return this.Ok(state);
             }
-            catch (BatchException batchException)
+            catch (BatchApiException batchApiException)
             {
-                var batchError = batchException.RequestInformation?.BatchError;
-                this.logger.LogError(batchError?.ToString());
-                return this.BadRequest(batchException.RequestInformation?.BatchError);
+                if (batchApiException.PoolNotFound())
+                {
+                    return this.NotFound();
+                }
+
+                this.logger.LogError(batchApiException.ToString());
+                return this.BadRequest(batchApiException.Message);
             }
             catch (Exception exception)
             {
@@ -86,7 +96,7 @@ namespace Teqniqly.AzBatch.Api.Controllers
         [HttpDelete]
         [Route("{poolId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BatchError))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteBatchPoolAsync(string poolId)
         {
@@ -95,11 +105,15 @@ namespace Teqniqly.AzBatch.Api.Controllers
                 await this.batchService.DeletePoolAsync(poolId);
                 return this.NoContent();
             }
-            catch (BatchException batchException)
+            catch (BatchApiException batchApiException)
             {
-                var batchError = batchException.RequestInformation?.BatchError;
-                this.logger.LogError(batchError?.ToString());
-                return this.BadRequest(batchException.RequestInformation?.BatchError);
+                if (batchApiException.PoolNotFound())
+                {
+                    return this.NoContent();
+                }
+
+                this.logger.LogError(batchApiException.ToString());
+                return this.BadRequest(batchApiException.Message);
             }
             catch (Exception exception)
             {
