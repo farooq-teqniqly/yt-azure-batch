@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NetflixDataPreprocessor": {
+      "commandName": "Project",
+      "commandLineArgs": "--input-file netflix.csv --output C:\\temp\\netflix-data"
+    }
+  }
+}
