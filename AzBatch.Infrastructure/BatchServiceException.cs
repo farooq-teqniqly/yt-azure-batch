@@ -10,7 +10,7 @@ namespace Teqniqly.AzBatch.Infrastructure
     public class BatchServiceException : Exception
     {
         public BatchServiceException(BatchException batchException)
-            : base(batchException.RequestInformation?.BatchError.Message.ToString())
+            : base(batchException.RequestInformation?.BatchError.Message.Value)
         {
             this.NativeException = batchException;
         }

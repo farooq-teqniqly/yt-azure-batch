@@ -18,5 +18,7 @@ namespace Teqniqly.AzBatch.Abstractions
         Task<string> GetPoolAllocationStateAsync(string poolId);
 
         Task DeletePoolAsync(string poolId);
+
+        Task CreateJobAsync(string jobId, string poolId);
     }
 }

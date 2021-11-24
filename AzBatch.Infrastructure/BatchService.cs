@@ -88,6 +88,22 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
         }
 
+        public async Task CreateJobAsync(string jobId, string poolId)
+        {
+            try
+            {
+                var job = this.batchClient.JobOperations.CreateJob(
+                    jobId,
+                    new PoolInformation { PoolId = poolId });
+
+                await job.CommitAsync();
+            }
+            catch (BatchException batchException)
+            {
+                throw new BatchServiceException(batchException);
+            }
+        }
+
         public void Dispose()
         {
             this.batchClient?.Dispose();
