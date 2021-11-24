@@ -2,6 +2,10 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
+using System;
+using Azure.Storage;
+using Azure.Storage.Blobs;
+
 namespace Teqniqly.AzBatch.Api
 {
     using Microsoft.AspNetCore.Builder;
@@ -49,6 +53,13 @@ namespace Teqniqly.AzBatch.Api
 
                 return BatchClient.Open(credentials);
             });
+
+            services.AddSingleton<BlobServiceClient>(provider => new BlobServiceClient(
+                new Uri(
+                    $"https://{batchServiceConfiguration.StorageConfiguration.AccountName}.blob.core.windows.net"),
+                new StorageSharedKeyCredential(
+                    batchServiceConfiguration.StorageConfiguration.AccountName,
+                    batchServiceConfiguration.StorageConfiguration.AccountKey)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

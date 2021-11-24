@@ -2,6 +2,8 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
+using System;
+
 namespace Teqniqly.AzBatch.Api.Controllers
 {
     using System.Threading.Tasks;
@@ -31,6 +33,32 @@ namespace Teqniqly.AzBatch.Api.Controllers
             try
             {
                 await this.batchService.CreateJobAsync(request.JobId, request.PoolId);
+                return this.Accepted();
+            }
+            catch (BatchServiceException batchServiceException)
+            {
+                this.logger.LogError(
+                    batchServiceException,
+                    batchServiceException.Message);
+
+                return this.BadRequest(batchServiceException.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("{jobId}/tasks")]
+        public async Task<IActionResult> CreateTasksAsync(
+            string jobId,
+            [FromBody] CreateBatchTasksRequest request)
+        {
+            try
+            {
+                await this.batchService.CreateJobTasksAsync(
+                    jobId,
+                    request.InputContainerName,
+                    request.OutputContainerName,
+                    request.ApplicationPackage);
+
                 return this.Accepted();
             }
             catch (BatchServiceException batchServiceException)
