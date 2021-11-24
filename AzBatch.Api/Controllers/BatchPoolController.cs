@@ -14,7 +14,7 @@ namespace Teqniqly.AzBatch.Api.Controllers
     using Teqniqly.AzBatch.Infrastructure;
 
     [ApiController]
-    [Route("pool")]
+    [Route("pools")]
     public class BatchPoolController : ControllerBase
     {
         private readonly IBatchService batchService;
