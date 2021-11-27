@@ -7,5 +7,12 @@ namespace Teqniqly.AzBatch.Abstractions
     public class BatchServiceConfiguration
     {
         public BatchServiceConnectionConfiguration ConnectionConfiguration { get; set; }
+        public BatchServiceStorageConfiguration StorageConfiguration { get; set; }
+    }
+
+    public class BatchServiceStorageConfiguration
+    {
+        public string AccountName { get; set; }
+        public string AccountKey { get; set; }
     }
 }

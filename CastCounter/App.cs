@@ -12,7 +12,7 @@ namespace Teqniqly.AzBatch.CastCounter
     {
         public async Task RunAsync(CommandLineOptions options)
         {
-            Console.WriteLine($"Reading file '{options.InputFile}'...");
+            Console.WriteLine($"Reading file '{options.InputFile.Trim()}'...");
 
             var inputText = await File.ReadAllTextAsync(options.InputFile);
 
@@ -21,7 +21,7 @@ namespace Teqniqly.AzBatch.CastCounter
                 .Length;
 
             await File.WriteAllTextAsync(
-                options.OutputFile,
+                options.OutputFile.Trim(),
                 castCount.ToString());
 
             Console.WriteLine($"Output written to '{options.OutputFile}'.");
