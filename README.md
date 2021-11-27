@@ -41,13 +41,11 @@ batchapi_1  |       Now listening on: http://[::]:80
 
 ### Docker cleanup
 Press `CTRL+C` to terminate the container.
-```
 
 Remove the Docker image by running the following in a Powershell session:
 ```powershell
 docker rmi -f docker_batchapi
 ```
-
 ### Azure cleanup
 Delete your resource group by running the following in a Powershell session:
 ```powershell
