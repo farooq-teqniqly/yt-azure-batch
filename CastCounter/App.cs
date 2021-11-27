@@ -27,7 +27,7 @@ namespace Teqniqly.AzBatch.CastCounter
 
             var ehClient = new EventHubProducerClient(options.EventHubConnectionString, options.EventHubName);
             var batch = await ehClient.CreateBatchAsync();
-            var message = new EventData(Encoding.UTF8.GetBytes(castCount.ToString()));
+            var message = new EventData(Encoding.UTF8.GetBytes($"{options.InputFile}\n{castCount.ToString()}"));
 
             try
             {
