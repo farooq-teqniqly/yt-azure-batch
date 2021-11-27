@@ -1,5 +1,5 @@
 $storageAccountName = 'ytdevwestus2sto'
-$storageAccountKey = 'nXr3qYrJf35USHwS9IEx6edKX4G49H1sq2IiRLumD0/V7bLMy+O6X2LQd20NRrflbz42eMNdS2XJ1SUe71u3ng=='
+$storageAccountKey = '+q3EfbjErAKFyra1GTL6p4ReDbnpq8JkRWvfqw8yoc7ZQMeSpbfYkAK1HcfGlXqZ/K5/9q+QK2OK4KSwNOrV7Q=='
 
 
 tar.exe -x -f .\data\movie-cast-files.zip -C .\data

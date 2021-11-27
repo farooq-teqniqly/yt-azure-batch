@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  batchapi:
+    ports:
+      - 3000:80
+    environment:
+      - Logging__LogLevel__Default=Information
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - BatchServiceConfiguration__ConnectionConfiguration__EndpointUri=[Your Azure Batch endpoint URI]
+      - BatchServiceConfiguration__ConnectionConfiguration__AccountName=[Your Azure Batch account name]
+      - BatchServiceConfiguration__ConnectionConfiguration__AccountKey=[Your Azure Batch account key]
+      - BatchServiceConfiguration__StorageConfiguration__AccountName=[Your storage account name]
+      - BatchServiceConfiguration__StorageConfiguration__AccountKey=[Your storage account key]
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile

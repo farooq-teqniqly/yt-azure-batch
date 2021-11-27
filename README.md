@@ -18,7 +18,7 @@
 
 ## Upload the CastCounter app to the Azure Batch account storage
 1. Open a Powershell session and go to the repository root.
-2. Open `deploy\UploadFiles.ps1`.
+2. Open `deploy\UploadCastCounter.ps1`.
 3. Specify your batch account name and resource group name on lines 1 and 2 respectively.
 4. Save the file.
 5. Run `deploy\UploadCastCounter.ps1` to upload the CastCounter app to the storage account.
@@ -27,24 +27,25 @@
 The API can be run via Docker.
 
 1. Open a Powershell session and go to the repository root.
-2. Run `BuildContainer.ps1`.
-3. When the container finishes building, run the following to start the container:
+2. Open `docker\docker-compose.yml`.
+3. Add the values for the settings on lines 10 through 14. These values can be found in the deployment output you copied in a previous step.
+4. Save the file.
+5. Run `docker\RunContainer.ps1`.
+6. Wait until you see output similar to the following:
 ```powershell
-docker run -p 3000:80 --name batchapi  -d yt/az-batch-api 
+batchapi_1  |       Now listening on: http://[::]:80
 ```
-4. In a browser, navigate to `http://localhost:3000/swagger` and the Swagger page should render.
+6. In a browser, navigate to `http://localhost:3000/swagger` and the Swagger page should render.
 
 ## Cleanup
 
 ### Docker cleanup
-Remove the API container by running the following in a Powershell session:
-```powershell
-docker rm -f batchapi
+Press `CTRL+C` to terminate the container.
 ```
 
 Remove the Docker image by running the following in a Powershell session:
 ```powershell
-docker rmi -f yt/az-batch-api
+docker rmi -f docker_batchapi
 ```
 
 ### Azure cleanup

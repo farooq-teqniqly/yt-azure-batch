@@ -5,17 +5,6 @@ var containerNames = [
   'input'
 ]
 
-resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: '${baseName}-insights'
-  location: location
-  kind: 'web'
-  properties: {
-    Application_Type: 'web'
-    publicNetworkAccessForIngestion: 'Enabled'
-    publicNetworkAccessForQuery: 'Enabled'
-  }
-}
-
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: '${replace(baseName, '-', '')}sto'
   location: location
@@ -67,8 +56,5 @@ output deploymentOutputs object = {
   }
   storage: {
     connectionString: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value}'
-  }
-  appInsights: {
-    key: appInsights.properties.InstrumentationKey
   }
 }
