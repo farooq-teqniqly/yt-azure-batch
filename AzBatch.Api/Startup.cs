@@ -2,12 +2,11 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-using System;
-using Azure.Storage;
-using Azure.Storage.Blobs;
-
 namespace Teqniqly.AzBatch.Api
 {
+    using System;
+    using Azure.Storage;
+    using Azure.Storage.Blobs;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Azure.Batch;

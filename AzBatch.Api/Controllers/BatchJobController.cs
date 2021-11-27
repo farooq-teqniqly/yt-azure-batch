@@ -2,11 +2,10 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace Teqniqly.AzBatch.Api.Controllers
 {
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Teqniqly.AzBatch.Abstractions;
@@ -28,6 +27,8 @@ namespace Teqniqly.AzBatch.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> CreateJobAsync([FromBody] CreateBatchJobRequest request)
         {
             try
@@ -45,8 +46,31 @@ namespace Teqniqly.AzBatch.Api.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("{jobId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        public async Task<IActionResult> DeleteJobAsync(string jobId)
+        {
+            try
+            {
+                await this.batchService.DeleteJobAsync(jobId);
+                return this.NoContent();
+            }
+            catch (BatchServiceException batchServiceException)
+            {
+                this.logger.LogError(
+                    batchServiceException,
+                    batchServiceException.Message);
+
+                return this.BadRequest(batchServiceException.Message);
+            }
+        }
+
         [HttpPost]
         [Route("{jobId}/tasks")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> CreateTasksAsync(
             string jobId,
             [FromBody] CreateBatchTasksRequest request)
@@ -56,7 +80,8 @@ namespace Teqniqly.AzBatch.Api.Controllers
                 await this.batchService.CreateJobTasksAsync(
                     jobId,
                     request.InputContainerName,
-                    request.OutputContainerName,
+                    request.EventHubConnectionString,
+                    request.EventHubName,
                     request.ApplicationPackage);
 
                 return this.Accepted();

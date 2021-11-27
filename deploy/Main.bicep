@@ -26,6 +26,15 @@ module batchAccountDeploy 'BatchAccount.bicep' = {
   }
 }
 
+module eventHubDeploy 'EventHub.bicep' = {
+  name: 'eventHubDeploy'
+  scope: rg
+  params: {
+    baseName: baseName
+    location: location
+  }
+}
+
 output deploymentOutputs object = {
   resourceGroupName: rgName
   batchAccountDeployment: {
@@ -38,5 +47,9 @@ output deploymentOutputs object = {
   }
   appInsightsDeployment: {
     instrumentationKey: batchAccountDeploy.outputs.deploymentOutputs.appInsights.key
+  }
+  eventHubDeployment: {
+    connectionString: eventHubDeploy.outputs.deploymentOutputs.eventHub.connectionString
+    name: eventHubDeploy.outputs.deploymentOutputs.eventHub.name
   }
 }

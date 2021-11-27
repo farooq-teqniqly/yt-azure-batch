@@ -5,7 +5,6 @@
 namespace Teqniqly.AzBatch.Management.Infrastructure
 {
     using System;
-    using Microsoft.Rest.Azure;
 
     public static class Extensions
     {

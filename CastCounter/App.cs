@@ -6,7 +6,10 @@ namespace Teqniqly.AzBatch.CastCounter
 {
     using System;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
+    using Azure.Messaging.EventHubs;
+    using Azure.Messaging.EventHubs.Producer;
 
     public class App
     {
@@ -20,11 +23,27 @@ namespace Teqniqly.AzBatch.CastCounter
                 .Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Length;
 
-            await File.WriteAllTextAsync(
-                options.OutputFile.Trim(),
-                castCount.ToString());
+            Console.WriteLine($"Count is '{castCount}'");
 
-            Console.WriteLine($"Output written to '{options.OutputFile}'.");
+            var ehClient = new EventHubProducerClient(options.EventHubConnectionString, options.EventHubName);
+            var batch = await ehClient.CreateBatchAsync();
+            var message = new EventData(Encoding.UTF8.GetBytes(castCount.ToString()));
+
+            try
+            {
+                if (!batch.TryAdd(message))
+                {
+                    throw new Exception("Event is too large for the batch and cannot be sent.");
+                }
+
+                await ehClient.SendAsync(batch);
+
+                Console.WriteLine("Message sent.");
+            }
+            finally
+            {
+                await ehClient.DisposeAsync();
+            }
         }
     }
 }

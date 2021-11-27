@@ -11,7 +11,10 @@ namespace Teqniqly.AzBatch.CastCounter
         [Option(longName: "input-file", shortName: 'f', Required = true, HelpText = "The input file.")]
         public string InputFile { get; set; }
 
-        [Option(longName: "output-file", shortName: 'o', Required = true, HelpText = "The output file.")]
-        public string OutputFile { get; set; }
+        [Option(longName: "event-hub-connection-string", Required = true, HelpText = "The target event hub namespace connection string.")]
+        public string EventHubConnectionString { get; set; }
+
+        [Option(longName: "event-hub-name", Required = true, HelpText = "The target event hub name.")]
+        public string EventHubName { get; set; }
     }
 }
