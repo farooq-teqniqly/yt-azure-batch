@@ -21,10 +21,13 @@ namespace Teqniqly.AzBatch.Abstractions
 
         Task CreateJobAsync(string jobId, string poolId);
 
+        Task DeleteJobAsync(string jobId);
+
         Task CreateJobTasksAsync(
             string jobId,
             string inputContainerName,
-            string outputContainerName,
+            string eventHubConnectionString,
+            string eventHubName,
             ApplicationPackage applicationPackage);
     }
 }

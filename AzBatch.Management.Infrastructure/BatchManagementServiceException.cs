@@ -10,7 +10,7 @@ namespace Teqniqly.AzBatch.Management.Infrastructure
     public class BatchManagementServiceException : Exception
     {
         public BatchManagementServiceException(CloudException cloudException)
-        :base(cloudException.Body.Message)
+        : base(cloudException.Body.Message)
         {
             this.NativeCloudException = cloudException;
         }

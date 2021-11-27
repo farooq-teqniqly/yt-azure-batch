@@ -2,17 +2,14 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-using System.IO;
-using Azure.Storage.Blobs;
-
 namespace Teqniqly.AzBatch.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Azure.Storage.Blobs;
     using Microsoft.Azure.Batch;
-    using Microsoft.Azure.Batch.Auth;
     using Microsoft.Azure.Batch.Common;
     using Teqniqly.AzBatch.Abstractions;
 
@@ -112,17 +109,28 @@ namespace Teqniqly.AzBatch.Infrastructure
             }
         }
 
+        public async Task DeleteJobAsync(string jobId)
+        {
+            try
+            {
+                await this.batchClient.JobOperations.DeleteJobAsync(jobId);
+            }
+            catch (BatchException batchException)
+            {
+                throw new BatchServiceException(batchException);
+            }
+        }
+
         public async Task CreateJobTasksAsync(
             string jobId,
             string inputContainerName,
-            string outputContainerName,
+            string eventHubConnectionString,
+            string eventHubName,
             ApplicationPackage applicationPackage)
         {
             var inputContainerClient = this.blobServiceClient.GetBlobContainerClient(inputContainerName);
             var blobItems = inputContainerClient.GetBlobsAsync();
             var inputResourceFiles = new List<ResourceFile>();
-            var outputContainerClient = this.blobServiceClient.GetBlobContainerClient(outputContainerName);
-            var outputContainer = new OutputFileBlobContainerDestination(outputContainerClient.Uri.ToString());
 
             await foreach (var blobItem in blobItems)
             {
@@ -140,23 +148,13 @@ namespace Teqniqly.AzBatch.Infrastructure
                 var taskId = $"Task-{i}";
                 var appPath = $"%AZ_BATCH_APP_PACKAGE_{applicationPackage.Id}#{applicationPackage.Version}%";
                 var inputFile = inputResourceFiles[i].FilePath;
-                var appOutputFile = $"{Path.GetFileNameWithoutExtension(inputResourceFiles[i].FilePath)}.out.txt";
-                var taskCommandLine = $"cmd /c {appPath}\\cc.exe --input-file {inputFile} --output-file {appOutputFile}";
+                var taskCommandLine = $"cmd /c {appPath}\\cc.exe --input-file {inputFile} --event-hub-connection-string {eventHubConnectionString} --event-hub-name {eventHubName}";
 
                 var task = new CloudTask(taskId, taskCommandLine)
                 {
-                    ResourceFiles = new List<ResourceFile> {inputResourceFiles[i]},
+                    ResourceFiles = new List<ResourceFile> { inputResourceFiles[i] },
                 };
 
-                var outputFiles = new List<OutputFile>();
-                
-                var outputFile = new OutputFile(
-                    appOutputFile,
-                    new OutputFileDestination(outputContainer),
-                    new OutputFileUploadOptions(OutputFileUploadCondition.TaskSuccess));
-
-                outputFiles.Add(outputFile);
-                task.OutputFiles = outputFiles;
                 tasks.Add(task);
             }
 

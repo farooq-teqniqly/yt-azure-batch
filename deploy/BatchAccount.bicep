@@ -3,7 +3,6 @@ param baseName string
 
 var containerNames = [
   'input'
-  'output'
 ]
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -46,7 +45,7 @@ resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containe
   name: name
   parent: storageAccount::defaultBlobService
   properties:{
-    publicAccess: 'None'
+    publicAccess: 'Container'
   }
 }]
 

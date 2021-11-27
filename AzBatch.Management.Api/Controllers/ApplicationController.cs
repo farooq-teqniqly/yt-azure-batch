@@ -4,12 +4,10 @@
 
 namespace Teqniqly.AzBatch.Management.Api.Controllers
 {
-    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Rest.Azure;
     using Teqniqly.AzBatch.Management.Abstractions;
     using Teqniqly.AzBatch.Management.Infrastructure;
 

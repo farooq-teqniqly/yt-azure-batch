@@ -7,6 +7,7 @@ namespace Teqniqly.AzBatch.Management.Api.Controllers
     public class DeleteApplicationPackageRequest
     {
         public string ApplicationPackageName { get; set; }
+
         public string ApplicationPackageVersion { get; set; }
     }
 }
