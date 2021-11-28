@@ -148,7 +148,7 @@ namespace Teqniqly.AzBatch.Infrastructure
                 var taskId = $"Task-{i}";
                 var appPath = $"%AZ_BATCH_APP_PACKAGE_{applicationPackage.Id}#{applicationPackage.Version}%";
                 var inputFile = inputResourceFiles[i].FilePath;
-                var taskCommandLine = $"cmd /c {appPath}\\cc.exe --input-file {inputFile} --event-hub-connection-string {eventHubConnectionString} --event-hub-name {eventHubName}";
+                var taskCommandLine = $"cmd /c {appPath}\\wc.exe --input-file {inputFile} --event-hub-connection-string {eventHubConnectionString} --event-hub-name {eventHubName}";
 
                 var task = new CloudTask(taskId, taskCommandLine)
                 {

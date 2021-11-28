@@ -2,7 +2,7 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-namespace Teqniqly.AzBatch.CastCounter
+namespace Teqniqly.AzBatch.WordCounter
 {
     using System;
     using System.IO;
@@ -15,19 +15,19 @@ namespace Teqniqly.AzBatch.CastCounter
     {
         public async Task RunAsync(CommandLineOptions options)
         {
-            Console.WriteLine($"Reading file '{options.InputFile.Trim()}'...");
+            Console.WriteLine($"Reading file '{options.InputFile}'...");
 
             var inputText = await File.ReadAllTextAsync(options.InputFile);
 
-            var castCount = inputText
+            var wordCount = inputText
                 .Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Length;
 
-            Console.WriteLine($"Count is '{castCount}'");
+            Console.WriteLine($"Count is '{wordCount}'");
 
             var ehClient = new EventHubProducerClient(options.EventHubConnectionString, options.EventHubName);
             var batch = await ehClient.CreateBatchAsync();
-            var message = new EventData(Encoding.UTF8.GetBytes($"{options.InputFile}\n{castCount.ToString()}"));
+            var message = new EventData(Encoding.UTF8.GetBytes($"{options.InputFile}\n{wordCount.ToString()}"));
 
             try
             {

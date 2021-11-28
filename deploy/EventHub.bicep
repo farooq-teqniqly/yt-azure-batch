@@ -21,7 +21,7 @@ resource eventHubNamespace 'Microsoft.EventHub/namespaces@2021-06-01-preview' = 
 
 resource eventHub 'Microsoft.EventHub/namespaces/eventhubs@2021-06-01-preview' = {
   parent: eventHubNamespace
-  name: 'castcounts'
+  name: 'wordcounts'
   properties: {
     messageRetentionInDays: 1
     partitionCount: 1

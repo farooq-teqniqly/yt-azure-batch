@@ -1,27 +1,27 @@
-$batchAccountName = 'ytdevwestus2ba'
-$resourceGroupName = 'yt-dev-westus2-rg'
-$applicationName = 'cc'
+$batchAccountName = '[Your Azure Batch account name]'
+$resourceGroupName = '[Your resource group name]'
+$applicationName = 'wc'
 $packageVersionName = 'latest'
 
-$ccPath = Join-Path -Path $pwd -ChildPath 'CastCounter'
-$ccProjectPath = Join-Path -Path $ccPath -ChildPath 'CastCounter.csproj'
-$ccPublishOutputPath = Join-Path -Path $ccPath -ChildPath 'publish'
+$ccPath = Join-Path -Path $pwd -ChildPath 'WordCounter'
+$wcProjectPath = Join-Path -Path $ccPath -ChildPath 'WordCounter.csproj'
+$wcPublishOutputPath = Join-Path -Path $ccPath -ChildPath 'publish'
 
 dotnet publish `
-    $ccProjectPath `
-    -o $ccPublishOutputPath `
+    $wcProjectPath `
+    -o $wcPublishOutputPath `
     -c Release `
     -r win-x64 `
     --self-contained
 
-$zipFileName = Join-Path -Path $ccPublishOutputPath -ChildPath 'cc.zip'
+$zipFileName = Join-Path -Path $wcPublishOutputPath -ChildPath 'wc.zip'
 
 tar.exe `
     -v `
     -a `
     -c `
     -f $zipFileName `
-    -C $ccPublishOutputPath `
+    -C $wcPublishOutputPath `
     --exclude *.zip `
     *.*
 
@@ -55,7 +55,7 @@ az batch application set `
     --application-name $applicationName `
     --default-version $packageVersionName
 
-$removePublishFilesPattern = Join-Path -Path $ccPublishOutputPath -ChildPath '*.*'
+$removePublishFilesPattern = Join-Path -Path $wcPublishOutputPath -ChildPath '*.*'
 Remove-Item $removePublishFilesPattern
 
 

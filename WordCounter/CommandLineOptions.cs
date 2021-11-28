@@ -2,7 +2,7 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-namespace Teqniqly.AzBatch.CastCounter
+namespace Teqniqly.AzBatch.WordCounter
 {
     using CommandLine;
 

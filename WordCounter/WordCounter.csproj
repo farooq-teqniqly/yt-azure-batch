@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>cc</AssemblyName>
-    <RootNamespace>Teqniqly.AzBatch.CastCounter</RootNamespace>
+    <AssemblyName>wc</AssemblyName>
+    <RootNamespace>Teqniqly.AzBatch.WordCounter</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
