@@ -45,9 +45,6 @@ output deploymentOutputs object = {
   storageDeployment: {
     connectionString: batchAccountDeploy.outputs.deploymentOutputs.storage.connectionString
   }
-  appInsightsDeployment: {
-    instrumentationKey: batchAccountDeploy.outputs.deploymentOutputs.appInsights.key
-  }
   eventHubDeployment: {
     connectionString: eventHubDeploy.outputs.deploymentOutputs.eventHub.connectionString
     name: eventHubDeploy.outputs.deploymentOutputs.eventHub.name
