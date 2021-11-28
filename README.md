@@ -21,7 +21,7 @@
 2. Open `deploy\UploadWordCounter.ps1`.
 3. Specify your batch account name and resource group name on lines 1 and 2 respectively.
 4. Save the file.
-5. Run `deploy\UploadWordCounter.ps1` to upload the CastCounter app to the storage account.
+5. Run `deploy\UploadWordCounter.ps1` to upload the WordCounter app to the storage account.
 
 ## Run the API
 The API can be run via Docker.
@@ -40,7 +40,7 @@ batchapi_1  |       Now listening on: http://[::]:80
 ## Create a batch pool
 1. Expand the `POST /pools` operation.
 2. Click `Try it out`.
-3. Add the request body below. This will create a pool with three compute nodes. The CastCounter application will be downloaded to each node.
+3. Add the request body below. This will create a pool with three compute nodes. The WordCounter application will be downloaded to each node.
 ```json
 {
   "batchPoolConfiguration": {
@@ -66,7 +66,7 @@ batchapi_1  |       Now listening on: http://[::]:80
 }
 ```
 4. Click `Execute`.
-5. Wait until the pool's state is `Steady` and all three nodes are in the `Idle` state. This will take several minutes to happen. You can periodically run `deploy\GetNodeState.ps1` to check the nodes' statuses.
+5. Wait until the pool's state is `Steady` and all three nodes are in the `Idle` state. This will take several minutes to happen. You can periodically run `deploy\GetNodeState.ps1` to check the nodes' statuses. Prior to running this file, be sure to specify your Batch account name and resource group name on lines 1 and 2 respectively.
 
 ## Create a batch job
 1. Expand the `POST /jobs` operation.
@@ -97,7 +97,9 @@ batchapi_1  |       Now listening on: http://[::]:80
 }
 ```
 
-You can view the status of the tasks by running `deploy\GetTaskStatus.ps1`. When you see 1,000 tasks completed, the job is done.
+You can view the status of the tasks by running `deploy\GetTaskStatus.ps1`. Prior to running this file, be sure to specify your Batch account name and resource group name on lines 1 and 2 respectively. 
+
+When you see 1,000 tasks completed, the job is done.
 ```json
 "taskCounts": {
     "active": 0,
