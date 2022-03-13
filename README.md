@@ -1,5 +1,7 @@
 # Azure Batch .NET application sample
 
+For more context you may view the [YouTube video](https://www.youtube.com/watch?v=kCw55pxS65E) or look at the PowerPoint deck in the **docs** folder.
+
 ## Create Azure resources
 1. Open `deploy\deploy.ps1` and change the deployment location.
 2. Open `deploy\parameters.dev.json` and change the value of the `solutioName` parameter to a unique string.
